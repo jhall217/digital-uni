@@ -11,9 +11,11 @@ Demonstrate competency with TypeScript and Playwright by writing Page Objects an
 
 ## Project Structure
 
-The project aims to follow the proper structure for TypeScript/Playwright projects. The current structure includes:
+I am sure the project structure does not follow the proper TypeScript / Playwright structure, the primary goal was to
+have working code over format. Ideally the classes and components enable writing tests without direct reference to
+Playwright locators and actions.
 
-### Components
+#### Components
 
 The goal of a component is to isolate direct Playwright actions within classes, reducing code duplication while improving test readability.
 
@@ -21,9 +23,11 @@ The goal of a component is to isolate direct Playwright actions within classes, 
 - **Support**: Contains a class that encapsulates a collection of components.
 - ![Send Message Component](Send_Message_Component.png)
 
-### Pages
+#### Pages
 
-Contains page objects which include relevant components or collections of components.
+Contains page objects which include relevant components or collections of components. They represent actual pages /
+screens of the application. These are the primary actors within tests and represent the user's perspective of the
+application.
 
 - **Support.ts**: [Support Page Object](pages/Support.ts)
 
