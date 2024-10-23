@@ -19,9 +19,15 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: npx playwright test
+      - name: List report directory contents
+        run: ls -la playwright-report/
       - uses: actions/upload-artifact@v4
         if: ${{ always() }}
         with:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+          if-no-files-found: warn
+          compression-level: 6
+          overwrite: false
+          include-hidden-files: false
