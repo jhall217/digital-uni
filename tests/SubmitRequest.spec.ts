@@ -11,19 +11,20 @@ test.beforeEach(async ({page}) => {
     messageComponent = supportPage.messageComponent
 });
 
-test('message component contains expected fields', async ({page}) => {
+test('Message component contains expected fields', async ({page}) => {
 
     expect(await supportPage.getTitle()).toContain('Digital University | Support');
 
     // Message Component assertions
     expect(await messageComponent.getHeaderText()).toContain('Send Us a Message');
-    expect(await messageComponent.submitButton.isDisplayed()).toBe(true);
     expect(await messageComponent.nameInput.isDisplayed()).toBe(true);
-    expect(await messageComponent.baseLocationInput.isDisplayed()).toBe(true);
     expect(await messageComponent.emailInput.isDisplayed()).toBe(true);
     expect(await messageComponent.phoneNumberInput.isDisplayed()).toBe(true);
+    expect(await messageComponent.baseLocationInput.isDisplayed()).toBe(true);
     expect(await messageComponent.howToHelpInput.isDisplayed()).toBe(true);
     expect(await messageComponent.questionInput.isDisplayed()).toBe(true);
+    expect(await messageComponent.submitButton.isDisplayed()).toBe(true);
+
 
 });
 
@@ -34,8 +35,8 @@ test('Submit no data results in required flags', async ({page}) => {
     // Required flags present
     expect(await messageComponent.nameInput.isFlaggedAsRequired()).toBe(true);
     expect(await messageComponent.emailInput.isFlaggedAsRequired()).toBe(true);
-    expect(await messageComponent.baseLocationInput.isFlaggedAsRequired()).toBe(true);
     expect(await messageComponent.phoneNumberInput.isFlaggedAsRequired()).toBe(true);
+    expect(await messageComponent.baseLocationInput.isFlaggedAsRequired()).toBe(true);
     expect(await messageComponent.howToHelpInput.isFlaggedAsRequired()).toBe(true);
     expect(await messageComponent.questionInput.isFlaggedAsRequired()).toBe(true);
 
