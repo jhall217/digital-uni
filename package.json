@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@playwright/test": "^1.48.1",
     "@types/node": "^22.7.8",
     "playwright": "^1.48.1",
     "ts-node": "^10.9.2",
@@ -15,20 +16,17 @@
   "dependencies": {
     "acorn": "^8.13.0",
     "acorn-walk": "^8.3.4",
-    "diff": "^4.0.2",
-    "playwright-core": "^1.48.1",
     "arg": "^4.1.3",
     "create-require": "^1.1.1",
+    "diff": "^4.0.2",
     "make-error": "^1.3.6",
-    "v8-compile-cache-lib": "^3.0.1",
+    "playwright-core": "^1.48.1",
+    "typescript": "5.6.3",
     "undici-types": "^6.19.8",
-    "yn": "^3.1.1",
-    "@playwright/test": "^1.48.1",
-    "typescript": "5.6.3"
+    "v8-compile-cache-lib": "^3.0.1",
+    "yn": "^3.1.1"
   },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jhall217/digital-uni.git"

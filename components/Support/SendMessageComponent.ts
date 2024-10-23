@@ -26,4 +26,8 @@ export class SendMessageComponent {
 
     }
 
+    async getHeaderText(): Promise<string> {
+        return await this.page.getByTestId("legend-text").textContent()
+    }
+
 }

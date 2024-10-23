@@ -1,6 +1,5 @@
 import {Page} from '@playwright/test';
 import {SendMessageComponent} from "../components/Support/SendMessageComponent";
-import {SuccessPage } from './SuccessPage'
 
 export class SupportPage {
     page: Page;
@@ -22,9 +21,4 @@ export class SupportPage {
         return await this.page.title();
     }
 
-    async getSuccessMessage(): Promise<SuccessPage> {
-        //TODO:  handle success
-        return undefined
-
-    }
 }

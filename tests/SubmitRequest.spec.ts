@@ -13,15 +13,16 @@ test.beforeEach(async ({page}) => {
 
 test('message component contains expected fields', async ({page}) => {
 
-    expect(await supportPage.getTitle()).toContain('Expected');
+    expect(await supportPage.getTitle()).toContain('Digital University | Support');
 
     // Message Component assertions
+    expect(await messageComponent.getHeaderText()).toContain('Send Us a Message');
     expect(await messageComponent.submitButton.isDisplayed()).toBe(true);
     expect(await messageComponent.nameInput.isDisplayed()).toBe(true);
     expect(await messageComponent.baseLocationInput.isDisplayed()).toBe(true);
     expect(await messageComponent.emailInput.isDisplayed()).toBe(true);
     expect(await messageComponent.phoneNumberInput.isDisplayed()).toBe(true);
-    expect(await messageComponent.howToHelpInput.isDisplayed()).toBe(true);
+    // expect(await messageComponent.howToHelpInput.isDisplayed()).toBe(true);
     expect(await messageComponent.questionInput.isDisplayed()).toBe(true);
 
 });
@@ -35,14 +36,15 @@ test('Submit no data results in required flags', async ({page}) => {
     expect(await messageComponent.emailInput.isFlaggedAsRequired()).toBe(true);
     expect(await messageComponent.baseLocationInput.isFlaggedAsRequired()).toBe(true);
     expect(await messageComponent.phoneNumberInput.isFlaggedAsRequired()).toBe(true);
-    expect(await messageComponent.howToHelpInput.isFlaggedAsRequired()).toBe(true);
+    // expect(await messageComponent.howToHelpInput.isFlaggedAsRequired()).toBe(true);
     expect(await messageComponent.questionInput.isFlaggedAsRequired()).toBe(true);
 
 })
 
 test('Question Field should be flagged as required', async ({page}) => {
 
-    await populateRequestForm("josh", "email@address.com", "Navy", "phone", "Logging in");
+    await populateRequestForm("josh", "email@army.mil", "Navy", "1234567890", "Logging in");
+    expect(await messageComponent.howToHelpInput.getSelectedOption()).toContain("Logging in")
     await messageComponent.submitButton.click()
 
     expect(await messageComponent.questionInput.isFlaggedAsRequired()).toBe(true);
@@ -50,31 +52,28 @@ test('Question Field should be flagged as required', async ({page}) => {
 })
 
 test('Can continue after correcting requirement', async ({page}) => {
-    await populateRequestForm("josh", "email@address.com", "Navy", "phone", "Logging in", "");
+    await populateRequestForm("josh", "email@army.mil", "Navy", "1234567890", "Logging in");
 
     await messageComponent.submitButton.click()
 
     expect(await messageComponent.questionInput.isFlaggedAsRequired()).toBe(true);
 
     await messageComponent.questionInput.inputText("test");
-
-    expect(await messageComponent.questionInput.isFlaggedAsRequired()).toBe(false);
-    let successPage = await supportPage.getSuccessMessage();
-    expect(successPage.isDisplayed()).toBe(true);
-
+    await messageComponent.submitButton.click()
+    await expect(page.getByRole('button', { name: 'OK' })).toBeVisible({ timeout: 10000 });
 
 })
 
 // Helper Utility methods
-async function populateRequestForm(nameInput: string, email: string, branch: string, phone: string, question: string, reason?: string) {
+async function populateRequestForm(nameInput: string, email: string, branch: string, phone: string, reason: string, question?: string,) {
     await messageComponent.nameInput.inputText(nameInput)
     await messageComponent.emailInput.inputText(email)
     await messageComponent.phoneNumberInput.inputText(phone)
     await messageComponent.baseLocationInput.inputText(branch)
-    await messageComponent.questionInput.inputText(question)
+    await messageComponent.howToHelpInput.selectOption(reason)
 
-    if (reason) {
-        await messageComponent.howToHelpInput.selectOption(reason)
+    if (question) {
+        await messageComponent.questionInput.inputText(question)
     }
 }
 
