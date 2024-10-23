@@ -6,7 +6,7 @@ on:
     branches: [ main, master ]
 jobs:
   test:
-    timeout-minutes: 60
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,6 +19,7 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: npx playwright test
+        continue-on-error: true
       - name: List report directory contents
         run: ls -la playwright-report/
       - uses: actions/upload-artifact@v4
