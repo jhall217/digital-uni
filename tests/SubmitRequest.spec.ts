@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test';
 import {SupportPage} from "../pages/Support";
-import {SendMessageComponent} from "../components/SendMessageComponent";
+import {SendMessageComponent} from "../components/Support/SendMessageComponent";
 
 let supportPage: SupportPage;
 let messageComponent: SendMessageComponent
@@ -31,12 +31,12 @@ test('Submit no data results in required flags', async ({page}) => {
     await messageComponent.submitButton.click()
 
     // Required flags present
-    expect(await messageComponent.nameInput.isRequiredErrorPresent()).toBe(true);
-    expect(await messageComponent.emailInput.isRequiredErrorPresent()).toBe(true);
-    expect(await messageComponent.baseLocationInput.isRequiredErrorPresent()).toBe(true);
-    expect(await messageComponent.phoneNumberInput.isRequiredErrorPresent()).toBe(true);
-    expect(await messageComponent.howToHelpInput.isRequiredErrorPresent()).toBe(true);
-    expect(await messageComponent.questionInput.isRequiredErrorPresent()).toBe(true);
+    expect(await messageComponent.nameInput.isFlaggedAsRequired()).toBe(true);
+    expect(await messageComponent.emailInput.isFlaggedAsRequired()).toBe(true);
+    expect(await messageComponent.baseLocationInput.isFlaggedAsRequired()).toBe(true);
+    expect(await messageComponent.phoneNumberInput.isFlaggedAsRequired()).toBe(true);
+    expect(await messageComponent.howToHelpInput.isFlaggedAsRequired()).toBe(true);
+    expect(await messageComponent.questionInput.isFlaggedAsRequired()).toBe(true);
 
 })
 
@@ -45,7 +45,7 @@ test('Question Field should be flagged as required', async ({page}) => {
     await populateRequestForm("josh", "email@address.com", "Navy", "phone", "Logging in");
     await messageComponent.submitButton.click()
 
-    expect(await messageComponent.questionInput.isRequiredErrorPresent()).toBe(true);
+    expect(await messageComponent.questionInput.isFlaggedAsRequired()).toBe(true);
 
 })
 
@@ -54,11 +54,11 @@ test('Can continue after correcting requirement', async ({page}) => {
 
     await messageComponent.submitButton.click()
 
-    expect(await messageComponent.questionInput.isRequiredErrorPresent()).toBe(true);
+    expect(await messageComponent.questionInput.isFlaggedAsRequired()).toBe(true);
 
     await messageComponent.questionInput.inputText("test");
 
-    expect(await messageComponent.questionInput.isRequiredErrorPresent()).toBe(false);
+    expect(await messageComponent.questionInput.isFlaggedAsRequired()).toBe(false);
     let successPage = await supportPage.getSuccessMessage();
     expect(successPage.isDisplayed()).toBe(true);
 

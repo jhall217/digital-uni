@@ -1,7 +1,7 @@
 import {type Page} from "@playwright/test";
-import {InputBox} from "./base/InputBox";
-import {ButtonComponent} from "./base/ButtonComponent";
-import {ListBox} from "./base/ListBox";
+import {InputBox} from "../base/InputBox";
+import {ButtonComponent} from "../base/ButtonComponent";
+import {ListBox} from "../base/ListBox";
 
 export class SendMessageComponent {
     page: Page;

@@ -1,5 +1,5 @@
 import {Page} from '@playwright/test';
-import {SendMessageComponent} from "../components/SendMessageComponent";
+import {SendMessageComponent} from "../components/Support/SendMessageComponent";
 import {SuccessPage } from './SuccessPage'
 
 export class SupportPage {

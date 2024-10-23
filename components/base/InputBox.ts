@@ -9,7 +9,14 @@ export class InputBox extends BaseComponent {
         this.testDataId = testDataId;
     }
 
+    /**
+     * Inputs the given text into the designated locator after clearing any existing text.
+     *
+     * @param text - The string to be input.
+     * @return A promise that resolves when the text has been input successfully.
+     */
     async inputText(text: string): Promise<void> {
+        await this.clear();
         await this.locator.fill(text);
     }
 
@@ -19,20 +26,6 @@ export class InputBox extends BaseComponent {
 
     async getValue(): Promise<string> {
         return await this.locator.inputValue();
-    }
-
-    async isRequiredErrorPresent(): Promise<boolean> {
-
-        //*[@id="email"]/../../div[2]
-
-
-        //TODO:  get error locator using component as root locator
-        try {
-            await this.page.locator(this.testDataId).isVisible()
-            return true
-        } catch (error) {
-            return false;
-        }
     }
 
 }

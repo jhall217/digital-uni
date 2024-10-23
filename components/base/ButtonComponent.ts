@@ -7,7 +7,4 @@ export class ButtonComponent extends BaseComponent {
         super(page, page.getByTestId(testDataId));
     }
 
-    async click(): Promise<void> {
-        await this.locator.click()
-    }
 }

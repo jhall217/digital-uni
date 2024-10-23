@@ -24,16 +24,11 @@ export class ListBox {
         }
     }
 
-    async isRequiredErrorPresent(): Promise<boolean> {
-
-        //*[@id="email"]/../../div[2]
-
-
-        //TODO:  get error locator using component as root locator
+    async isFlaggedAsRequired(): Promise<boolean> {
         try {
-            // await this.locator(this.testDataId).isVisible()
-            return true
+            return await this.locator.locator('span.required-asterisk').isVisible();
         } catch (error) {
+            console.error('Error checking if flagged as required:', error);
             return false;
         }
     }

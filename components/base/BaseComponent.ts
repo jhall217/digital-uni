@@ -27,4 +27,18 @@ export class BaseComponent {
         }
     }
 
+    async click(): Promise<void> {
+        await this.locator.click()
+    }
+
+    async isFlaggedAsRequired(): Promise<boolean> {
+        try {
+            let requiredFlagXpath = 'xpath=./../../div[2]';
+            return await this.locator.locator(requiredFlagXpath).isVisible();
+        } catch (error) {
+            console.error('Error checking if flagged as required:', error);
+            return false;
+        }
+    }
+
 }
