@@ -4,10 +4,17 @@ import {Locator, Page} from '@playwright/test';
 export class BaseComponent {
     page: Page;
     locator: Locator;
+    locatorAsString: string;
 
-    constructor(page: Page, locator: Locator) {
+    constructor(page: Page, locator: string | Locator) {
         this.page = page;
-        this.locator = locator;
+
+        if (typeof locator === 'string') {
+            this.locatorAsString = locator;
+            this.locator = this.page.locator(locator);
+        } else {
+            this.locator = locator;
+        }
     }
 
     async isDisplayed(timeout: number = 10 * 1000): Promise<boolean> {

@@ -1,27 +1,28 @@
 import {type Page} from "@playwright/test";
 import {InputBox} from "./base/InputBox";
 import {ButtonComponent} from "./base/ButtonComponent";
+import {ListBox} from "./base/ListBox";
 
 export class SendMessageComponent {
     page: Page;
     nameInput: InputBox;
-    submitButton: ButtonComponent;
     emailInput: InputBox;
-    branchLocationInput: InputBox;
     phoneNumberInput: InputBox;
-    reasonInput: InputBox
+    baseLocationInput: InputBox;
+    howToHelpInput: ListBox
     questionInput: InputBox;
+    submitButton: ButtonComponent;
 
 
     constructor(page: Page) {
         this.page = page;
         this.nameInput = new InputBox(page, 'name');
-        this.submitButton = new ButtonComponent(page, 'submit-button');
         this.emailInput = new InputBox(page, 'email');
-        this.branchLocationInput = new InputBox(page, 'branch-location');
-        this.phoneNumberInput = new InputBox(page, 'phone-number');
-        this.reasonInput = new InputBox(page, 'reason');
-        this.questionInput = new InputBox(page, 'question')
+        this.phoneNumberInput = new InputBox(page, 'phoneNumber');
+        this.baseLocationInput = new InputBox(page, 'dutyStation');
+        this.howToHelpInput = new ListBox(page);
+        this.questionInput = new InputBox(page, 'message')
+        this.submitButton = new ButtonComponent(page, 'submit-button');
 
     }
 

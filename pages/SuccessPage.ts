@@ -3,11 +3,9 @@ import {Locator, Page} from "@playwright/test";
 export class SuccessPage {
     private page: Page;
     private readonly locator: Locator;
-    private rootLocator: string;
 
     constructor(page: Page, rootLocator: string) {
         this.page = page;
-        this.rootLocator = rootLocator;
         this.locator = this.page.locator(rootLocator)
     }
 

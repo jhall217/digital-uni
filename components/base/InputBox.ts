@@ -2,7 +2,7 @@ import {Page} from '@playwright/test';
 import {BaseComponent} from "./BaseComponent";
 
 export class InputBox extends BaseComponent {
-    private readonly testDataId: string;
+    testDataId: string;
 
     constructor(page: Page, testDataId: string) {
         super(page, page.getByTestId(testDataId));
@@ -22,6 +22,10 @@ export class InputBox extends BaseComponent {
     }
 
     async isRequiredErrorPresent(): Promise<boolean> {
+
+        //*[@id="email"]/../../div[2]
+
+
         //TODO:  get error locator using component as root locator
         try {
             await this.page.locator(this.testDataId).isVisible()
